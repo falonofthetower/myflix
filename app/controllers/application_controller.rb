@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    flash[:error] = "You don't have the access to do that!"
+    flash[:danger] = "You don't have the access to do that!"
     redirect_to sign_in_path
   end
 
