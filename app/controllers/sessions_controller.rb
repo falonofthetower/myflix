@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:notice] = "You have logged in"
+      flash[:info] = "You have logged in"
       redirect_to videos_path
     else
-      flash[:error] = "Your credentials are invalid!"
+      flash[:danger] = "Your credentials are invalid!"
       redirect_to login_path
     end
   end
