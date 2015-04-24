@@ -1,17 +1,10 @@
-Category.create name: "Comedies"
-Category.create name: "Dramas"
-Video.create title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", small_cover_url: "monk", large_cover_url: "monk_large", category_id: 1
-Video.create title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", small_cover_url: "monk", large_cover_url: "monk_large", category_id: 1
-Video.create title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", small_cover_url: "monk", large_cover_url: "monk_large", category_id: 1
-Video.create title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", small_cover_url: "monk", large_cover_url: "monk_large", category_id: 1
-Video.create title: "Family Guy", description: "In a wacky Rhode Island town, a dysfunctional family strive to cope with everyday life as they are thrown from one crazy scenario to another.", small_cover_url: "family_guy", large_cover_url: "family_guy_large", category_id: 2
+comedies = Category.create name: "Comedies"
+dramas = Category.create name: "Dramas"
 
-Video.create title: "South Park", description: "Follows the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.", small_cover_url: "south_park", large_cover_url: "south_park_large", category_id: 2
+7.times { Video.create title: "Monk", description: "Adrian Monk is a brilliant San Francisco detective, whose obsessive compulsive disorder just happens to get in the way.", small_cover_url: "monk", large_cover_url: "monk_large", category: dramas }
 
-Video.create title: "South Park", description: "Follows the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.", small_cover_url: "south_park", large_cover_url: "south_park_large", category_id: 2
+Video.create title: "Family Guy", description: "In a wacky Rhode Island town, a dysfunctional family strive to cope with everyday life as they are thrown from one crazy scenario to another.", small_cover_url: "family_guy", large_cover_url: "family_guy_large", category: comedies
 
-Video.create title: "Futurama", description: "Fry, a pizza guy is accidentally frozen in 1999 and thawed out New Year's Eve 2999.", small_cover_url: "futurama", large_cover_url: "futurama_large", category_id: 2
+2.times { Video.create title: "South Park", description: "Follows the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.", small_cover_url: "south_park", large_cover_url: "south_park_large", category: comedies }
 
-Video.create title: "Futurama", description: "Fry, a pizza guy is accidentally frozen in 1999 and thawed out New Year's Eve 2999.", small_cover_url: "futurama", large_cover_url: "futurama_large", category_id: 2
-
-
+2.times { Video.create title: "Futurama", description: "Fry, a pizza guy is accidentally frozen in 1999 and thawed out New Year's Eve 2999.", small_cover_url: "futurama", large_cover_url: "futurama_large", category: comedies }
