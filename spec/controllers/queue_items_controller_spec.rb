@@ -10,6 +10,7 @@ describe QueueItemsController do
       get :index
       expect(assigns(:queue_items)).to match_array([light_saber, r2d2])
     end
+    
     it " redirects to the sign in page for unauthenticated users" do
       get :index
       expect(response).to redirect_to sign_in_path
@@ -65,6 +66,7 @@ describe QueueItemsController do
       post :create, video_id: empire.id
       expect(luke.queue_items.count).to eq(1)
     end
+    
     it "redirects to the sign in page for unauthenticated users" do
       post :create, video_id: 3
       expect(response).to redirect_to sign_in_path
@@ -95,6 +97,7 @@ describe QueueItemsController do
       delete :destroy, id: queue_item.id
       expect(QueueItem.count).to eq(1)
     end
+    
     it "redirects to the sign in page for unauthenticated users" do
       delete :destroy, id: 3
       expect(response).to redirect_to sign_in_path
