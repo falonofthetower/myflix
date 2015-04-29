@@ -8,6 +8,7 @@ describe Category do
   end
 
   it { should have_many(:videos) }
+  it { should validate_presence_of :name }
 
 end
 describe "#recent_videos" do
