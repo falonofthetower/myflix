@@ -102,6 +102,5 @@ describe QueueItemsController do
       delete :destroy, id: 3
       expect(response).to redirect_to sign_in_path
     end
-
   end
 end
