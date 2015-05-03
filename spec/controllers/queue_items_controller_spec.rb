@@ -10,8 +10,8 @@ describe QueueItemsController do
       get :index
       expect(assigns(:queue_items)).to match_array([light_saber, r2d2])
     end
-    
-    it " redirects to the sign in page for unauthenticated users" do
+
+    it "redirects to the sign in page for unauthenticated users" do
       get :index
       expect(response).to redirect_to sign_in_path
     end
@@ -38,7 +38,7 @@ describe QueueItemsController do
       post :create, video_id: video.id
       expect(QueueItem.first.video).to eq(video)
     end
-    
+
     it "creates the queue item that is associated with the user" do
       luke = Fabricate(:user)
       session[:user_id] = luke.id
@@ -115,58 +115,49 @@ describe QueueItemsController do
 
   describe "POST update_queue" do
     context "with valid inputs" do
-      it "should redirect to the my queue page" do
-        luke = Fabricate(:user)
+      let(:empire_strikes_back) { Fabricate(:video) }
+      let(:light_saber) { Fabricate(:queue_item, user: luke, position: 1, video: empire_strikes_back) }
+      let(:r2d2) { Fabricate(:queue_item, user: luke, position: 2, video: empire_strikes_back) }
+      let(:luke) { Fabricate(:user) }
+      before do
         session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
+      end
+
+      it "should redirect to the my queue page" do
         post :update_queue, queue_items: [{id: light_saber.id, position: 2}, {id: r2d2.id, position: 1}]
         expect(response).to redirect_to my_queue_path
       end
 
       it "reorders the queue items" do
-        luke = Fabricate(:user)
-        session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
         post :update_queue, queue_items: [{id: light_saber.id, position: 2}, {id: r2d2.id, position: 1}]
         expect(luke.queue_items).to eq([r2d2, light_saber])
       end
 
       it "normalizes the position numbers"  do
-        luke = Fabricate(:user)
-        session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
         post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 1}]
         expect(luke.queue_items.map(&:position)).to eq([1, 2])
       end
     end
 
     context "with invalid inputs" do
-      it "redirects back to my queue" do
-        luke = Fabricate(:user)
+      let(:empire_strikes_back) { Fabricate(:video) }
+      let(:light_saber) { Fabricate(:queue_item, user: luke, position: 1, video: empire_strikes_back) }
+      let(:r2d2) { Fabricate(:queue_item, user: luke, position: 2, video: empire_strikes_back) }
+      let(:luke) { Fabricate(:user) }
+      before do
         session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
+      end
+      it "redirects back to my queue" do
         post :update_queue, queue_items: [{id: light_saber.id, position: 3.4}, {id: r2d2.id, position: 1}]
         expect(response).to redirect_to my_queue_path
       end
 
       it "sets the flash danger message" do
-        luke = Fabricate(:user)
-        session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
         post :update_queue, queue_items: [{id: light_saber.id, position: 3.4}, {id: r2d2.id, position: 1}]
         expect(flash[:danger]).to be_present
       end
 
       it "does not change the queue items" do
-        luke = Fabricate(:user)
-        session[:user_id] = luke.id
-        light_saber = Fabricate(:queue_item, user: luke, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 2)
         post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 2.1}]
         expect(light_saber.reload.position).to eq(1)
         expect(response).to redirect_to my_queue_path
@@ -185,8 +176,9 @@ describe QueueItemsController do
         luke = Fabricate(:user)
         leia = Fabricate(:user)
         session[:user_id] = leia.id
-        light_saber = Fabricate(:queue_item, user: leia, position: 1)
-        r2d2 = Fabricate(:queue_item, user: luke, position: 1)
+        empire_strikes_back = Fabricate(:video)
+        light_saber = Fabricate(:queue_item, user: leia, position: 1, video: empire_strikes_back)
+        r2d2 = Fabricate(:queue_item, user: luke, position: 1, video: empire_strikes_back)
         post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 3}]
         expect(r2d2.reload.position).to eq(1)
       end
