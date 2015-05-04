@@ -66,7 +66,7 @@ describe QueueItemsController do
       post :create, video_id: empire.id
       expect(luke.queue_items.count).to eq(1)
     end
-    
+
     it "redirects to the sign in page for unauthenticated users" do
       post :create, video_id: 3
       expect(response).to redirect_to sign_in_path
@@ -97,7 +97,7 @@ describe QueueItemsController do
       delete :destroy, id: queue_item.id
       expect(QueueItem.count).to eq(1)
     end
-    
+
     it "redirects to the sign in page for unauthenticated users" do
       delete :destroy, id: 3
       expect(response).to redirect_to sign_in_path
@@ -147,11 +147,7 @@ describe QueueItemsController do
       before do
         session[:user_id] = luke.id
       end
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> c17bf562752f9caff020ed902e2cda876543f143
       it "redirects back to my queue" do
         post :update_queue, queue_items: [{id: light_saber.id, position: 3.4}, {id: r2d2.id, position: 1}]
         expect(response).to redirect_to my_queue_path
