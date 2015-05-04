@@ -161,7 +161,6 @@ describe QueueItemsController do
       it "does not change the queue items" do
         post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 2.1}]
         expect(light_saber.reload.position).to eq(1)
-        expect(response).to redirect_to my_queue_path
       end
     end
 
