@@ -15,16 +15,16 @@ describe QueueItem do
 
   describe "#rating" do
     it "returns the rating from the review when the review is present" do
-      video = Fabricate(:video)
       user = Fabricate(:user)
-      review = Fabricate(:review, user: user, video: video, rating: 4)
+      video = Fabricate(:video)
+      Fabricate(:review, user: user, video: video, rating: 4)
       queue_item = Fabricate(:queue_item, user: user, video: video)
       expect(queue_item.rating).to eq(4)
     end
 
     it "returns nil when the review is not present" do
-      video = Fabricate(:video)
       user = Fabricate(:user)
+      video = Fabricate(:video)
       queue_item = Fabricate(:queue_item, user: user, video: video)
       expect(queue_item.rating).to eq(nil)
     end
@@ -39,30 +39,29 @@ describe QueueItem do
     end
 
     describe "#rating=" do
-      it "changes the rating of the review if the review is present" do
-        a_new_hope = Fabricate(:video)
-        luke = Fabricate(:user)
-        review = Fabricate(:review, user: luke, video: a_new_hope, rating: 2)
-        queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
-        queue_item.rating = 4
-        expect(Review.first.rating).to eq(4)
-      end
+      context "with a user and video" do
 
-      it "clears the rating of the review if the review is present" do
-        a_new_hope = Fabricate(:video)
-        luke = Fabricate(:user)
-        review = Fabricate(:review, user: luke, video: a_new_hope, rating: 2)
-        queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
-        queue_item.rating = nil
-        expect(Review.first.rating).to be_nil
-      end
+        with_a_luke_and_a_new_hope
 
-      it "creates a review with the rating if the review is not present" do
-        a_new_hope = Fabricate(:video)
-        luke = Fabricate(:user)
-        queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
-        queue_item.rating = 3
-        expect(Review.first.rating).to eq(3)
+        it "changes the rating of the review if the review is present" do
+          Fabricate(:review, user: luke, video: a_new_hope, rating: 2)
+          queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
+          queue_item.rating = 4
+          expect(Review.first.rating).to eq(4)
+        end
+
+        it "clears the rating of the review if the review is present" do
+          Fabricate(:review, user: luke, video: a_new_hope, rating: 2)
+          queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
+          queue_item.rating = nil
+          expect(Review.first.rating).to be_nil
+        end
+
+        it "assigns the correct rating to the new review" do
+          queue_item = Fabricate(:queue_item, user: luke, video: a_new_hope)
+          queue_item.rating = 3
+          expect(Review.first.rating).to eq(3)
+        end
       end
     end
 
