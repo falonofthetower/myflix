@@ -1,4 +1,4 @@
-def set_current_user(user=nil)
+def set_current_user(user = nil)
   session[:user_id] = (user || Fabricate(:user)).id
 end
 
@@ -11,8 +11,8 @@ def with_a_luke_and_a_new_hope
   let(:luke) { Fabricate(:user) }
 end
 
-def user_sign_in(a_user=nil)
-  user = a_user || Fabricate(:user)
+def user_sign_in(user = nil)
+  user ||= Fabricate(:user)
   visit sign_in_path
   fill_in 'Email Address', :with => user.email
   fill_in 'Password', :with => user.password
