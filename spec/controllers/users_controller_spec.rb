@@ -41,4 +41,18 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET show" do
+    let(:luke) { Fabricate(:user) }
+
+    it "sets @user" do
+      set_current_user
+      get :show, id: luke.id
+      expect(assigns(:user)).to eq(luke)
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: luke.id }
+    end
+  end
 end
