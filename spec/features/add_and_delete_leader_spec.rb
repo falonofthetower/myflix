@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-feature "user uses follow features" do
-  scenario "user navigates to another user adds, and then deletes them" do
+feature "user follows another user" do
+  scenario "user follows another user and then deletes following" do
     space_opera = Fabricate(:category)
     star_wars = Fabricate(:video, title: "A New Hope", category: space_opera)
     another_user = Fabricate(:user)
