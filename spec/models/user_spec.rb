@@ -22,4 +22,20 @@ describe User do
       luke.queued_item?(star_wars).should be_falsey
     end
   end
+
+  describe "#follows?" do
+    it "returns true if the user has a following relationship with another user" do
+      luke = Fabricate(:user)
+      leia = Fabricate(:user)
+      Fabricate(:relationship, leader: luke, follower: leia)
+      expect(leia.follows? luke).to be_true
+    end
+
+    it "returns false if the user does not have a following relationship with the user" do
+      luke = Fabricate(:user)
+      leia = Fabricate(:user)
+      Fabricate(:relationship, leader: leia, follower: luke)
+      expect(leia.follows? luke).to be_false
+    end
+  end
 end

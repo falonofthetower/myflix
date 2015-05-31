@@ -50,4 +50,38 @@ describe RelationshipsController do
     end
 
   end
+
+  describe "POST create" do
+    it "redirects to the people page" do
+      luke = Fabricate(:user)
+      set_current_user luke
+      leia = Fabricate(:user)
+      post :create, leader_id: leia.id
+      expect(response).to redirect_to people_path
+    end
+
+    it "creates a relationship of the user following the leader" do
+      luke = Fabricate(:user)
+      set_current_user luke
+      leia = Fabricate(:user)
+      post :create, leader_id: leia.id
+      expect(luke.following_relationships.first.leader).to eq(leia)
+    end
+
+    it "does not create a new relationship if one already exists" do
+      luke = Fabricate(:user)
+      set_current_user luke
+      leia = Fabricate(:user)
+      post :create, leader_id: leia.id
+      post :create, leader_id: leia.id
+      expect(Relationship.count).to eq(1)
+    end
+
+    it "does not create a relationship to itself" do
+      luke = Fabricate(:user)
+      set_current_user luke
+      post :create, leader_id: luke.id
+      expect(Relationship.count).to eq(0)
+    end
+  end
 end
