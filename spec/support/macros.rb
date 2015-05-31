@@ -6,6 +6,10 @@ def current_user
   User.find(session[:user_id])
 end
 
+def click_on_video_on_home_page(video)
+  find("a[href='/videos/#{video.id}']").click
+end
+
 def with_a_luke_and_a_new_hope
   let(:a_new_hope) { Fabricate(:video) }
   let(:luke) { Fabricate(:user) }
