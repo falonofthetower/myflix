@@ -24,23 +24,22 @@ describe UsersController do
     end
 
     context "email sending" do
-      let(:luke) { Fabricate(:user) }
-      before do
+
+      after { ActionMailer::Base.deliveries.clear }
+
+      it "sends out the email given valid inputs" do
         post :create, user: Fabricate.attributes_for(:user, email: "example@example.com", full_name: "The Wizard of Id")
+        expect(ActionMailer::Base.deliveries.last.to).to eq(["example@example.com"])
       end
 
-      it "sends out the email" do
-        ActionMailer::Base.deliveries.should_not be_empty
+      it "email sent out has users name" do
+        post :create, user: Fabricate.attributes_for(:user, email: "example@example.com", full_name: "The Wizard of Id")
+        expect(ActionMailer::Base.deliveries.last.body).to include("The Wizard of Id")
       end
 
-      it "has the correct recipient" do
-        message = ActionMailer::Base.deliveries.last
-        message.to.should == ["example@example.com"]
-      end
-
-      it "has the correct name" do 
-        message = ActionMailer::Base.deliveries.last
-        message.body.should include("The Wizard of Id")
+      it "email does not send given invalid inputs" do
+        post :create, user: { email: "example@example.com", full_name: "The Wizard of Id", password: "" }
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
 
