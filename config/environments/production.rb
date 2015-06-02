@@ -28,4 +28,5 @@ Myflix::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
+  config.action_mailer.default_url_options = { host: "https://peter-myflix.herokuapp.com/" }
 end
