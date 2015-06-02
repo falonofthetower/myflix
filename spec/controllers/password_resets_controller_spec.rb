@@ -21,31 +21,26 @@ describe PasswordResetsController do
   end
 
   describe "POST create" do
-    it "redirects to the sign in page" do
-      luke = Fabricate(:user, password: 'old_password')
+
+    let(:luke) { Fabricate(:user, password: 'old_password') }
+    before do
       luke.update_column(:token, '12345')
       post :create, token: '12345', password: 'new_password'
+    end
+
+    it "redirects to the sign in page" do
       expect(response).to redirect_to sign_in_path
     end
 
     it "updates the user's password" do
-      luke = Fabricate(:user, password: 'old_password')
-      luke.update_column(:token, '12345')
-      post :create, token: '12345', password: 'new_password'
       expect(luke.reload.authenticate('new_password')).to be_truthy
     end
 
     it "sets the flash success message" do
-      luke = Fabricate(:user, password: 'old_password')
-      luke.update_column(:token, '12345')
-      post :create, token: '12345', password: 'new_password'
       expect(flash[:success]).to be_present
     end
 
     it "deletes the user token" do
-      luke = Fabricate(:user, password: 'old_password')
-      luke.update_column(:token, '12345')
-      post :create, token: '12345', password: 'new_password'
       expect(luke.reload.token).to be nil
     end
   end
