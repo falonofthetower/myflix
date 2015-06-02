@@ -38,4 +38,9 @@ describe User do
       expect(leia.follows? luke).to be false
     end
   end
+
+  it "doesn't generate token on user creation" do
+    luke = Fabricate(:user)
+    expect(luke.token).to be_nil
+  end
 end
