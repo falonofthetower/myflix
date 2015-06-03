@@ -1,4 +1,6 @@
 class AppMailer < ActionMailer::Base
+  default from: 'info@myflix.com'
+
   def welcome(user)
     @user = user
     mail from: 'info@myflix.com', to: user.email, subject: "You are now a member of the MyFlix Family!"
