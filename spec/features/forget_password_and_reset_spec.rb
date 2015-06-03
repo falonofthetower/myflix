@@ -1,22 +1,24 @@
 require 'spec_helper'
 
 feature "user forgets and resets password" do
-  let(:neo) { Fabricate(:user) }
+  let(:neo) { Fabricate(:user, password: "old_password") }
   background do
     clear_emails
-    submit_forgot_password_request neo
-    open_email(neo.email)
   end
 
   scenario "user resets password, then attempts to do so again" do
-    visit_reset_password_link
-    expect(page).to have_content("Reset Your Password")
+    neo = Fabricate(:user, password: "old_password")
+
+    submit_forgot_password_request neo
+
+    visit_password_reset_link neo
 
     change_password "new_password"
+
     user_sign_in neo, "new_password"
     expect(page).to have_content("You have logged in")
 
-    visit_reset_password_link
+    visit_password_reset_link neo
     expect(page).to have_content("expired")
   end
 
@@ -37,7 +39,8 @@ feature "user forgets and resets password" do
     current_email
   end
 
-  def visit_reset_password_link
+  def visit_password_reset_link(user)
+    open_email(user.email)
     current_email.click_link "Reset Password"
   end
 end
