@@ -11,11 +11,14 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt-ruby', '3.1.2'
+gem 'figaro'
 
 group :development do
   gem 'thin'
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'letter_opener'
+  gem 'guard-rspec'
 end
 
 group :development, :test do
@@ -31,6 +34,7 @@ group :test do
   gem 'fabrication'
   gem 'faker'
   gem 'launchy'
+  gem 'capybara-email'
 end
 
 group :production do

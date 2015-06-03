@@ -15,10 +15,11 @@ def with_a_luke_and_a_new_hope
   let(:luke) { Fabricate(:user) }
 end
 
-def user_sign_in(user = nil)
+def user_sign_in(user = nil, password = nil)
   user ||= Fabricate(:user)
+  password ||= user.password
   visit sign_in_path
-  fill_in 'Email Address', :with => user.email
-  fill_in 'Password', :with => user.password
+  fill_in 'Email Address', with: user.email
+  fill_in 'Password', with: password
   click_button 'Sign in'
 end
