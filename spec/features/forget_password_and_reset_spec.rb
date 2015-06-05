@@ -2,9 +2,6 @@ require 'spec_helper'
 
 feature "user forgets and resets password" do
   let(:neo) { Fabricate(:user, password: "old_password") }
-  background do
-    clear_emails
-  end
 
   scenario "user resets password, then attempts to do so again" do
     neo = Fabricate(:user, password: "old_password")

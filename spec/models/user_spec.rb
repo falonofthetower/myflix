@@ -37,10 +37,25 @@ describe User do
       Fabricate(:relationship, leader: leia, follower: luke)
       expect(leia.follows? luke).to be false
     end
+
+    it "doesn't generate token on user creation" do
+      luke = Fabricate(:user)
+      expect(luke.token).to be_nil
+    end
   end
 
-  it "doesn't generate token on user creation" do
-    luke = Fabricate(:user)
-    expect(luke.token).to be_nil
+  describe "#follow" do
+    it "follows another user" do
+      luke = Fabricate(:user)
+      leia = Fabricate(:user)
+      luke.follow(leia)
+      expect(luke.follows?(leia)).to be_truthy
+    end
+
+    it "does not follow oneself" do
+      luke = Fabricate(:user)
+      luke.follow(luke)
+      expect(luke.follows?(luke)).to be_falsey
+    end
   end
 end
