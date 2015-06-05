@@ -2,7 +2,7 @@ class PasswordResetsController < ApplicationController
   def show
     user = User.where(token: params[:id]).first
     if user
-      @token = user.token 
+      @token = user.token
     else
       redirect_to expired_token_path
     end
@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
     user = User.where(token: params[:token]).first
     user.password = params[:password]
     if user.save
-      user.destroy_token
+      user.detokenize
       flash[:success] = "Password Changed!"
       redirect_to sign_in_path
     else
