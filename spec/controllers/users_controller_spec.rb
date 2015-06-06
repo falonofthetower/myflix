@@ -24,7 +24,11 @@ describe UsersController do
 
       it "makes the user follow the inviter" do
         luke = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: luke, recipient_email: "hans@falcon.com")
+        invitation = Fabricate(
+          :invitation,
+          inviter: luke,
+          recipient_email: "hans@falcon.com"
+        )
         post :create, user: {
           email: "hans@falcon.com",
           full_name: "Hans Solo",
@@ -82,13 +86,12 @@ describe UsersController do
       end
 
       it "email does not send given invalid inputs" do
-        post :create,
-          user: {
+        post :create, user: {
           email: "example@example.com",
           full_name: "The Wizard of Id",
           password: ""
         }
-        expect(ActionMailer::Base.deliveries).to be_empty
+          expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
 
@@ -145,7 +148,7 @@ describe UsersController do
     end
 
     it "redirects to exipred token page for invalid tokens" do
-      get :new_with_invitation_token, token: 'random_blah'
+      get :new_with_invitation_token, token: "random_blah"
       expect(response).to redirect_to expired_token_path
     end
   end
