@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "user invites another user and they sign up" do
   scenario "user sends invite, invitee signs up" do
@@ -27,11 +27,13 @@ feature "user invites another user and they sign up" do
     click_link "Invite friend"
     fill_in "Friend's Name", with: friend.full_name
     fill_in "Friend's Email Address", with: friend.email
-    fill_in "Invitation Message",
+    fill_in(
+    "Invitation Message",
     with: "This is your last chance. After this, there is no turning back. \
     You take the blue pill - the story ends, you wake up in your bed and \
     believe whatever you want to believe. You take the red pill\
     - you stay in Wonderland and I show you how deep the rabbit-hole goes."
+    )
     click_button "Send Invitation"
     sign_out
   end
