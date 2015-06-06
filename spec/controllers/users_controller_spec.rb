@@ -41,7 +41,11 @@ describe UsersController do
 
       it "make the inviter follow the user" do
         luke = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: luke, recipient_email: "hans@falcon.com")
+        invitation = Fabricate(
+          :invitation,
+          inviter: luke,
+          recipient_email: "hans@falcon.com"
+        )
         post :create, user: {
           email: "hans@falcon.com",
           full_name: "Hans Solo",
@@ -71,15 +75,16 @@ describe UsersController do
     context "email sending" do
       it "sends out the email given valid inputs" do
         post :create,
-          user: Fabricate.attributes_for(:user,
-                                         email: "example@example.com",
-            full_name: "The Wizard of Id")
+          user: Fabricate.attributes_for(
+            :user,
+            email: "example@example.com",
+            full_name: "The Wizard of Id"
+        )
         expect(ActionMailer::Base.deliveries.last.to).to eq(["example@example.com"])
       end
 
       it "email sent out has users name" do
-        post :create,
-          user: Fabricate.attributes_for(
+        post :create, user: Fabricate.attributes_for(
             :user, email: "example@example.com", full_name: "The Wizard of Id"
         )
         expect(ActionMailer::Base.deliveries.last.body).to include("The Wizard of Id")
