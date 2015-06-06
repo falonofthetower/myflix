@@ -19,6 +19,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'guard-rspec'
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
 end
 
 group :development, :test do

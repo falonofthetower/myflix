@@ -3,8 +3,9 @@ class Invitation < ActiveRecord::Base
 
   belongs_to :inviter, class_name: "User"
 
-  validates_presence_of :recipient_email, :recipient_name, :message
+  validates :recipient_email, presence: true
+  validates :recipient_name, presence: true
+  validates :message, presence: true
 
   before_create :generate_token
-
 end

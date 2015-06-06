@@ -11,11 +11,11 @@ module Tokenable
 
   def tokenize
     generate_token
-    self.save(:validate => false)
+    save(validate: false)
   end
 
   def detokenize
     destroy_token
-    self.save(:validate => false)
+    save(validate: false)
   end
 end

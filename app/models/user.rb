@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   def normalize_queue_item_positions
-      queue_items.each_with_index do |queue_item, index|
+    queue_items.each_with_index do |queue_item, index|
       queue_item.update_attributes(position: index+1)
     end
   end
@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   end
 
   def follow(another_user)
-    following_relationships.create(leader: another_user) if can_follow?(another_user)
+    if can_follow?(another_user)
+      following_relationships.create(leader: another_user)
+    end
   end
 end
