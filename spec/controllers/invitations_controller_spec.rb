@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe InvitationsController do
   describe "GET new" do
@@ -20,63 +20,59 @@ describe InvitationsController do
     end
 
     context "with valid input" do
-      it "redirects to the invitation new page" do
+      before do
         set_current_user
-        post :create, invitation: { recipient_name: "Joe Black", recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
+        post :create, invitation: {
+          recipient_name: "Joe Black",
+          recipient_email: "hades@hell.com",
+          message: "When I introduce you, and I tell them who you are, \
+          I don't think anyone will stay for dinner."
+        }
+      end
+
+      it "redirects to the invitation new page" do
         expect(response).to redirect_to new_invitation_path
       end
 
       it "creates an invitation" do
-        set_current_user
-        post :create, invitation: { recipient_name: "Joe Black", recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(Invitation.count).to eq(1)
       end
 
       it "sends an email to the recipient" do
-        set_current_user
-        post :create, invitation: { recipient_name: "Joe Black", recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(ActionMailer::Base.deliveries.last.to).to eq(["hades@hell.com"])
       end
 
       it "sets the flash success page" do
-        set_current_user
-        post :create, invitation: { recipient_name: "Joe Black", recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(flash[:success]).to be_present
-
       end
     end
 
     context "with invalid input" do
-
-      before { ActionMailer::Base.deliveries.clear }
+      before do
+        set_current_user
+        post :create, invitation: {
+          recipient_email: "hades@hell.com",
+          message: "When I introduce you, and I tell them who you are, \
+          I don't think anyone will stay for dinner." }
+      end
 
       it "renders the :new template" do
-        set_current_user
-        post :create, invitation: { recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(response).to render_template :new
       end
 
       it "does not create invitation" do
-        set_current_user
-        post :create, invitation: { recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(Invitation.count).to eq(0)
       end
 
       it "does not send the email" do
-        set_current_user
-        post :create, invitation: { recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(ActionMailer::Base.deliveries).to be_empty
       end
 
       it "sets the flash danger message" do
-        set_current_user
-        post :create, invitation: { recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(flash[:danger]).to be_present
       end
 
       it "sets the @invitation" do
-        set_current_user
-        post :create, invitation: { recipient_email: "hades@hell.com", message: "When I introduce you, and I tell them who you are, I don't think anyone will stay for dinner." }
         expect(assigns(:invitation)).to be_instance_of(Invitation)
       end
     end

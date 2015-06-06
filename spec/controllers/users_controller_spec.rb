@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe UsersController do
   describe "GET new" do
@@ -24,41 +24,70 @@ describe UsersController do
 
       it "makes the user follow the inviter" do
         luke = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: luke, recipient_email: 'hans@falcon.com')
-        post :create, user: { email: 'hans@falcon.com', full_name: 'Hans Solo', password: 'password'}, invitation_token: invitation.token
-        hans = User.where(email: 'hans@falcon.com').first
+        invitation = Fabricate(:invitation, inviter: luke, recipient_email: "hans@falcon.com")
+        post :create, user: {
+          email: "hans@falcon.com",
+          full_name: "Hans Solo",
+          password: "password"
+        }, invitation_token: invitation.token
+
+        hans = User.where(email: "hans@falcon.com").first
         expect(hans.follows?(luke)).to be_truthy
       end
 
       it "make the inviter follow the user" do
         luke = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: luke, recipient_email: 'hans@falcon.com')
-        post :create, user: { email: 'hans@falcon.com', full_name: 'Hans Solo', password: 'password'}, invitation_token: invitation.token
-        hans = User.where(email: 'hans@falcon.com').first
+        invitation = Fabricate(:invitation, inviter: luke, recipient_email: "hans@falcon.com")
+        post :create, user: {
+          email: "hans@falcon.com",
+          full_name: "Hans Solo",
+          password: "password"
+        }, invitation_token: invitation.token
+
+        hans = User.where(email: "hans@falcon.com").first
         expect(luke.follows?(hans)).to be_truthy
       end
 
       it "expires the invitation upon acceptance" do
         luke = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: luke, recipient_email: 'hans@falcon.com')
-        post :create, user: { email: 'hans@falcon.com', full_name: 'Hans Solo', password: 'password'}, invitation_token: invitation.token
+        invitation = Fabricate(
+          :invitation,
+          inviter: luke,
+          recipient_email: "hans@falcon.com"
+        )
+        post :create, user: {
+          email: "hans@falcon.com",
+          full_name: "Hans Solo",
+          password: "password"
+        }, invitation_token: invitation.token
         expect(Invitation.first.token).to be_nil
       end
     end
 
     context "email sending" do
       it "sends out the email given valid inputs" do
-        post :create, user: Fabricate.attributes_for(:user, email: "example@example.com", full_name: "The Wizard of Id")
+        post :create,
+          user: Fabricate.attributes_for(:user,
+                                         email: "example@example.com",
+            full_name: "The Wizard of Id")
         expect(ActionMailer::Base.deliveries.last.to).to eq(["example@example.com"])
       end
 
       it "email sent out has users name" do
-        post :create, user: Fabricate.attributes_for(:user, email: "example@example.com", full_name: "The Wizard of Id")
+        post :create,
+          user: Fabricate.attributes_for(
+            :user, email: "example@example.com", full_name: "The Wizard of Id"
+        )
         expect(ActionMailer::Base.deliveries.last.body).to include("The Wizard of Id")
       end
 
       it "email does not send given invalid inputs" do
-        post :create, user: { email: "example@example.com", full_name: "The Wizard of Id", password: "" }
+        post :create,
+          user: {
+          email: "example@example.com",
+          full_name: "The Wizard of Id",
+          password: ""
+        }
         expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
