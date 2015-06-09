@@ -12,6 +12,9 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'figaro'
+gem 'sidekiq'
+gem 'puma'
+gem 'sentry-raven'
 
 group :development do
   gem 'thin'
