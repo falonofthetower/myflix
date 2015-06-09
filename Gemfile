@@ -12,6 +12,8 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'figaro'
+gem 'sidekiq'
+gem 'puma'
 
 group :development do
   gem 'thin'
@@ -41,5 +43,6 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'sentry-raven'
 end
 
