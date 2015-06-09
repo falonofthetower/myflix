@@ -1,5 +1,5 @@
 class AppMailer < ActionMailer::Base
-  default from: "info@dpeter-myflix.herokuapp.com"
+  default from: "info@peter-myflix.herokuapp.com"
 
   def welcome(user)
     @user = user
