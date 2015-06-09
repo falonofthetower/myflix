@@ -14,6 +14,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'figaro'
 gem 'sidekiq'
 gem 'puma'
+gem 'sentry-raven'
 
 group :development do
   gem 'thin'
@@ -43,6 +44,5 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'sentry-raven'
 end
 
