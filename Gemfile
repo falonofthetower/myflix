@@ -15,6 +15,8 @@ gem 'figaro'
 gem 'sidekiq'
 gem 'puma'
 gem 'sentry-raven'
+gem 'carrierwave-aws'
+gem 'mini_magick'
 
 group :development do
   gem 'thin'
