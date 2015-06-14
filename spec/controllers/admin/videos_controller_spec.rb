@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Admin::VideosController do
   describe "GET new" do
@@ -13,15 +13,15 @@ describe Admin::VideosController do
     end
 
     it "redirects the regular user to the home path" do
-     set_current_user
-     get :new
-     expect(response).to redirect_to home_path
+      set_current_user
+      get :new
+      expect(response).to redirect_to home_path
     end
 
     it "set the flash error message for regular user" do
-     set_current_user
-     get :new
-     expect(flash[:danger]).to be_present
+      set_current_user
+      get :new
+      expect(flash[:danger]).to be_present
     end
   end
 
