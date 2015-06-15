@@ -31,3 +31,12 @@ def user_sign_in(user = nil, password = nil)
   fill_in 'Password', with: password
   click_button 'Sign in'
 end
+
+def admin_sign_in(admin = nil, password = nil)
+  admin ||= Fabricate(:admin)
+  password ||= admin.password
+  visit sign_in_path
+  fill_in 'Email Address', with: admin.email
+  fill_in 'Password', with: password
+  click_button 'Sign in'
+end
