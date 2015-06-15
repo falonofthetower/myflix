@@ -7,7 +7,7 @@
       %li= link_to "My Queue", my_queue_path
       %li= link_to "People", people_path
       - if current_user.admin?
-        %li= link_to "Add Video", new_admin_video_path
+        %li= link_to "Admin", new_admin_video_path
     = form_tag search_videos_path, class: 'col-md-5 navbar-form' do
       .form-group
         = text_field_tag 'search_term', nil, placeholder: "Search for videos here", class: 'form-control'
