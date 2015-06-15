@@ -36,7 +36,8 @@ family_guy = Video.create title: "Family Guy",
 darth_vader = User.create(
   full_name: "James Earl Jones",
   password: "I am your father",
-  email: "anakin@deathstar.com"
+  email: "anakin@deathstar.com",
+  admin: false
 )
 
 User.create(
