@@ -5,7 +5,7 @@ feature "Admin adds video" do
     Fabricate(:category, name: "Anime")
     admin_sign_in
 
-    click_link "Add Video"
+    visit new_admin_video_path
     fill_in "Title", with: "Attack on Titan"
     select "Anime", from: "Category"
     fill_in "Description", with:
