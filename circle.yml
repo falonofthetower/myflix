@@ -8,7 +8,7 @@ deployment:
       - heroku maintenance:on --app peter-myflix
       - heroku pg:backups capture --app peter-myflix
       - git fetch origin --unshallow
-      - figaro heroku:set -e production
+      - figaro heroku:set -e production --app peter-myflix
       - git push git@heroku.com:peter-myflix.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app peter-myflix
       - heroku maintenance:off --app peter-myflix
@@ -17,7 +17,7 @@ deployment:
     commands:
       - heroku maintenance:on --app peter-myflix-staging
       - git fetch origin --unshallow
-      - figaro heroku:set -e staging
+      - figaro heroku:set -e staging --app peter-myflix-staging
       - git push git@heroku.com:peter-myflix-staging.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app peter-myflix-staging
       - heroku maintenance:off --app peter-myflix-staging
