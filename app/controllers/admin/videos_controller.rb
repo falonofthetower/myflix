@@ -12,13 +12,13 @@ class Admin::VideosController < ApplicationController
       flash[:success] = "#{@video.title} successfully saved!"
       redirect_to new_admin_video_path
     else
-      flash[:danger] = "Check error messages!"
+      flash.now[:danger] = "Check error messages!"
       render :new
     end
   end
 
   def require_admin
-    if !current_user.admin?
+    unless current_user.admin?
       flash[:danger] = "You don't have authorization to do that"
       redirect_to home_path
     end
