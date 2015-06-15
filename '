@@ -12,9 +12,9 @@ feature "Admin adds video" do
       "After his hometown is destroyed and his mother is killed, \
       young Eren Jaegar vows to cleanse the earth of the giant humanoid \
       Titans that have brought humanity to the brink of extinction."
-    attach_file "Large Cover", Rails.root + "public/tmp/castle_large.jpg"
-    attach_file "Small Cover", Rails.root + "public/tmp/castle.jpg"
-    fill_in "Video URL", with: "https://example.com/video.mp4"
+    attach_file "Large Cover", Rails.root + "public/tmp/attack_on_titan_large.jpg"
+    attach_file "Small Cover", Rails.root + "public/tmp/attack_on_titan_large.jpg"
+    fill_in "Video URL", with: "https://attack-on-titan.com/video.mp4"
     click_button "Add Video"
 
     sign_out
@@ -23,7 +23,7 @@ feature "Admin adds video" do
     video = Video.find_by_title "Attack on Titan"
 
     find("a[href='/videos/#{video.id}']").click
-    expect(page).to have_selector("img[src='/uploads/castle_large.jpg']")
-    expect(page).to have_selector("a[href='https://example.com/video.mp4']")
+    expect(page).to have_selector("img[src='/uploads/attack_on_titan_large.jpg']")
+    expect(page).to have_selector("a[href='https://attack-on-titan.com/video.mp4']")
   end
 end
