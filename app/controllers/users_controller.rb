@@ -20,6 +20,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       handle_invitation
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      Stripe::Charge.create(
+        :amount => 999, # amount in cents, again
+        :currency => "usd",
+        :source => params[:stripeToken],
+        :description => "Sign up charge for #{@user.email}"
+      )
       AppMailer.delay.welcome(@user)
       redirect_to sign_in_path
     else
@@ -32,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :full_name)
+    params.require(:user).permit(:email, :password, :full_name, :stripeToken)
   end
 
   private
