@@ -168,12 +168,12 @@ describe QueueItemsController do
       end
 
       it "sets the flash danger message" do
-        post :update_queue, queue_items: [{id: light_saber.id, position: 3.4}, {id: r2d2.id, position: 1}]
+        post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 2.1}]
         expect(flash[:danger]).to be_present
       end
 
       it "does not change the queue items" do
-        post :update_queue, queue_items: [{id: light_saber.id, position: 3}, {id: r2d2.id, position: 2.1}]
+        post :update_queue, queue_items: [{id: light_saber.id, position: 2}, {id: r2d2.id, position: 3.4}]
         expect(light_saber.reload.position).to eq(1)
       end
     end
