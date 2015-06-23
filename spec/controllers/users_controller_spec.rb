@@ -84,23 +84,27 @@ describe UsersController do
     end
 
     context "with valid input but invalid card" do
-      it "does not create a new user record" do
-        charge = double(:charge, successful?: false, error_message: "Your card was declined")
+      let(:charge) {
+        double(
+          :charge,
+          successful?: false, error_message: "Your card was declined"
+        )
+      }
+
+      before do
         StripeWrapper::Charge.should_receive(:create).and_return(charge)
-        post :create, user: Fabricate.attributes_for(:user), stripeToken: '12345678'
+        post :create, user: Fabricate.attributes_for(:user),
+                        stripeToken: '12345678'
+      end
+
+      it "does not create a new user record" do
         expect(User.count).to eq(0)
       end
       it "renders the new template" do
-        charge = double(:charge, successful?: false, error_message: "Your card was declined")
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
-        post :create, user: Fabricate.attributes_for(:user), stripeToken: '12345678'
         expect(response).to render_template :new
       end
 
       it "sets the flash error message" do
-        charge = double(:charge, successful?: false, error_message: "Your card was declined")
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
-        post :create, user: Fabricate.attributes_for(:user), stripeToken: '12345678'
         expect(flash[:danger]).to be_present
       end
     end
@@ -141,20 +145,21 @@ describe UsersController do
       let(:charge) { double(:charge, successful?: true) }
       before do
         StripeWrapper::Charge.should_receive(:create).and_return(charge)
+        post :create, user: Fabricate.attributes_for(
+          :user, email: "example@example.com", full_name: "The Wizard of Id"
+        )
       end
 
       it "sends out the email given valid inputs" do
-        post :create, user: Fabricate.attributes_for(
-          :user, email: "example@example.com", full_name: "The Wizard of Id"
-        )
-        expect(ActionMailer::Base.deliveries.last.to).to eq(["example@example.com"])
+        expect(
+          ActionMailer::Base.deliveries.last.to
+        ).to eq(["example@example.com"])
       end
 
       it "email sent out has users name" do
-        post :create, user: Fabricate.attributes_for(
-          :user, email: "example@example.com", full_name: "The Wizard of Id"
-        )
-        expect(ActionMailer::Base.deliveries.last.body).to include("The Wizard of Id")
+        expect(
+          ActionMailer::Base.deliveries.last.body
+        ).to include("The Wizard of Id")
       end
     end
   end

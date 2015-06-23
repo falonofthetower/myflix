@@ -1,7 +1,7 @@
 require "spec_helper"
 
 feature "user invites another user and they sign up" do
-  scenario "user sends invite, invitee signs up", { js: true, vcr: true } do
+  scenario "user sends invite, invitee signs up", js: true, vcr: true do
     morpheus = Fabricate(:user)
     neo = Fabricate.build(:user)
 
@@ -52,7 +52,7 @@ feature "user invites another user and they sign up" do
     select "7 - July", from: "date_month"
     select 1.year.from_now.year, from: "date_year"
     click_button "Sign Up"
-    expect(page).to have_css('.alert-success')
+    expect(page).to have_css(".alert-success")
   end
 
   def check_for_following(other_user)
