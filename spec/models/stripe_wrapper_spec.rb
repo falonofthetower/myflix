@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe StripeWrapper do
   describe StripeWrapper::Charge do

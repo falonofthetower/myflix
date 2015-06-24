@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "User registers", js: true, vcr: true do
   background do
@@ -71,7 +71,7 @@ end
 
 def fill_in_credit_card_info_with(card_number)
   fill_in "Credit Card Number", with: card_number
-  fill_in "Security Code", with: '123'
+  fill_in "Security Code", with: "123"
   select "7 - July", from: "date_month"
   select 1.year.from_now.year, from: "date_year"
 end

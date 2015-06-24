@@ -84,17 +84,17 @@ describe UsersController do
     end
 
     context "with valid input but invalid card" do
-      let(:charge) {
+      let(:charge) do
         double(
           :charge,
           successful?: false, error_message: "Your card was declined"
         )
-      }
+      end
 
       before do
         StripeWrapper::Charge.should_receive(:create).and_return(charge)
         post :create, user: Fabricate.attributes_for(:user),
-                        stripeToken: '12345678'
+                      stripeToken: "12345678"
       end
 
       it "does not create a new user record" do
