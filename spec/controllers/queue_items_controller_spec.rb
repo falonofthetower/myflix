@@ -92,7 +92,7 @@ describe QueueItemsController do
       expect(QueueItem.count).to eq(0)
     end
 
-    it "does not not delete the queue item if the current_user doesn't own that queue item" do
+    it "does not delete the queue item if the user doesn't own that item" do
       luke = Fabricate(:user)
       set_current_user(luke)
       leia = Fabricate(:user)
@@ -123,17 +123,20 @@ describe QueueItemsController do
   describe "POST update_queue" do
     it_behaves_like "requires sign in" do
       let(:action) do
-        post :update_queue, queue_items: [{id: 2,  position: 3}, {id: 1, position: 1}]
+        post :update_queue,
+          queue_items: [{id: 2,  position: 3}, {id: 1, position: 1}]
       end
     end
 
     context "with valid inputs" do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
-        Fabricate(:queue_item, user: luke, position: 1, video: empire_strikes_back)
+        Fabricate :queue_item,
+          user: luke, position: 1, video: empire_strikes_back
       end
       let(:r2d2) do
-        Fabricate(:queue_item, user: luke, position: 2, video: empire_strikes_back)
+        Fabricate :queue_item,
+          user: luke, position: 2, video: empire_strikes_back
       end
       let(:luke) { Fabricate(:user) }
       before do
@@ -166,10 +169,12 @@ describe QueueItemsController do
     context "with invalid inputs" do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
-        Fabricate(:queue_item, user: luke, position: 1, video: empire_strikes_back)
+        Fabricate :queue_item,
+          user: luke, position: 1, video: empire_strikes_back
       end
       let(:r2d2) do
-        Fabricate(:queue_item, user: luke, position: 2, video: empire_strikes_back)
+        Fabricate :queue_item,
+          user: luke, position: 2, video: empire_strikes_back
       end
       let(:luke) { Fabricate(:user) }
       before do
@@ -191,11 +196,10 @@ describe QueueItemsController do
       end
 
       it "does not change the queue items" do
-        post :update_queue,
-          queue_items: [
-            { id: light_saber.id, position: 2 }, { id: r2d2.id, position: 3.4 }
+        post :update_queue, queue_items: [
+          { id: light_saber.id, position: 2 }, { id: r2d2.id, position: 3.4 }
         ]
-        expect(light_saber.reload.position).to eq(1)
+          expect(light_saber.reload.position).to eq(1)
       end
     end
 
