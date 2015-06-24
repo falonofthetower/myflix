@@ -132,11 +132,15 @@ describe QueueItemsController do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
         Fabricate :queue_item,
-          user: luke, position: 1, video: empire_strikes_back
+          user: luke,
+          position: 1,
+          video: empire_strikes_back
       end
       let(:r2d2) do
         Fabricate :queue_item,
-          user: luke, position: 2, video: empire_strikes_back
+          user: luke,
+          position: 2,
+          video: empire_strikes_back
       end
       let(:luke) { Fabricate(:user) }
       before do
@@ -199,7 +203,7 @@ describe QueueItemsController do
         post :update_queue, queue_items: [
           { id: light_saber.id, position: 2 }, { id: r2d2.id, position: 3.4 }
         ]
-          expect(light_saber.reload.position).to eq(1)
+        expect(light_saber.reload.position).to eq(1)
       end
     end
 
