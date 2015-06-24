@@ -123,8 +123,9 @@ describe QueueItemsController do
   describe "POST update_queue" do
     it_behaves_like "requires sign in" do
       let(:action) do
-        post :update_queue,
-          queue_items: [{id: 2,  position: 3}, {id: 1, position: 1}]
+        post :update_queue, queue_items: [
+         { id: 2,  position: 3 }, { id: 1, position: 1 }
+        ]
       end
     end
 
