@@ -131,16 +131,20 @@ describe QueueItemsController do
     context "with valid inputs" do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
-        Fabricate(:queue_item,
-                  user: luke,
-                  position: 1,
-                  video: empire_strikes_back)
+        Fabricate(
+          :queue_item,
+          user: luke,
+          position: 1,
+          video: empire_strikes_back
+        )
       end
       let(:r2d2) do
-        Fabricate :queue_item,
+        Fabricate(
+          :queue_item,
           user: luke,
           position: 2,
           video: empire_strikes_back
+        )
       end
       let(:luke) { Fabricate(:user) }
       before do
@@ -173,16 +177,20 @@ describe QueueItemsController do
     context "with invalid inputs" do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
-        Fabricate :queue_item,
+        Fabricate(
+          :queue_item,
           user: luke,
           position: 1,
           video: empire_strikes_back
+        )
       end
       let(:r2d2) do
-        Fabricate :queue_item,
+        Fabricate(
+          :queue_item,
           user: luke,
           position: 2,
           video: empire_strikes_back
+        )
       end
       let(:luke) { Fabricate(:user) }
       before do
