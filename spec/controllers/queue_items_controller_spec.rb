@@ -174,11 +174,15 @@ describe QueueItemsController do
       let(:empire_strikes_back) { Fabricate(:video) }
       let(:light_saber) do
         Fabricate :queue_item,
-          user: luke, position: 1, video: empire_strikes_back
+          user: luke,
+          position: 1,
+          video: empire_strikes_back
       end
       let(:r2d2) do
         Fabricate :queue_item,
-          user: luke, position: 2, video: empire_strikes_back
+          user: luke,
+          position: 2,
+          video: empire_strikes_back
       end
       let(:luke) { Fabricate(:user) }
       before do
