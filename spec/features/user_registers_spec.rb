@@ -7,7 +7,7 @@ feature "User registers", js: true, vcr: true do
 
   given(:valid_card_number) { "4242 4242 4242 4242" }
   given(:declining_card_number) { "4000 0000 0000 0002" }
-  given(:expired_card_number)  { "4000 0000 0000 0069" }
+  given(:expired_card_number) { "4000 0000 0000 0069" }
 
   scenario "with valid card and valid user info" do
     fill_in_valid_user_info
