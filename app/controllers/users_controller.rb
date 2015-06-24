@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         AppMailer.delay.welcome(@user)
         redirect_to sign_in_path
       else
-        flash[:danger] = charge.error_message
+        flash.now[:danger] = charge.error_message
         render :new
       end
     else
