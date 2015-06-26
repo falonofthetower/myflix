@@ -22,7 +22,11 @@ describe UsersController do
 
     context "failed sign up" do
       before do
-        result = double(:sign_up_result, successful?: false, error_message: "This is failure")
+        result = double(
+          :sign_up_result,
+          successful?: false,
+          error_message: "This is failure"
+        )
         UserSignup.any_instance.should_receive(:sign_up).and_return(result)
         post :create, user: Fabricate.attributes_for(:user)
       end

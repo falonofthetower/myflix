@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe UserSignup do
   describe "#sign_up" do
@@ -19,7 +19,11 @@ describe UserSignup do
       let(:charge) { double(:charge, successful?: true) }
       let(:luke) { Fabricate(:user) }
       let(:invitation) do
-        Fabricate(:invitation, inviter: luke, recipient_email: "hans@falcon.com")
+        Fabricate(
+          :invitation,
+          inviter: luke,
+          recipient_email: "hans@falcon.com"
+        )
       end
 
       before do
@@ -55,7 +59,11 @@ describe UserSignup do
       before do
         StripeWrapper::Charge.should_receive(:create).and_return(charge)
         UserSignup.new(
-          Fabricate.build(:user, email: "example@example.com", full_name: "The Wizard of Id")
+          Fabricate.build(
+            :user,
+            email: "example@example.com",
+            full_name: "The Wizard of Id"
+          )
         ).sign_up("stripe_token", nil)
       end
 
@@ -74,8 +82,10 @@ describe UserSignup do
 
     context "with valid input but invalid card" do
       let(:charge) do
-        double(:charge,
-          successful?: false, error_message: "Your card was declined"
+        double(
+          :charge,
+          successful?: false,
+          error_message: "Your card was declined"
         )
       end
 
@@ -93,7 +103,7 @@ describe UserSignup do
       before do
         UserSignup.new(
           User.new(
-            email:"email@example.com",
+            email: "email@example.com",
             full_name: "no password"
           )).sign_up("stripe_token", nil)
       end
