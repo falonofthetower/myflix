@@ -23,13 +23,13 @@ class UsersController < ApplicationController
         params[:stripeToken],
         params[:invitation_token]
     )
-    if result.successful?
+      if result.successful?
         flash[:success] = "Account Created!"
         redirect_to sign_in_path
-    else
-      flash.now[:danger] = result.error_message
-      render :new
-    end
+      else
+        flash.now[:danger] = result.error_message
+        render :new
+      end
   end
 
   def show
