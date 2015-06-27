@@ -17,6 +17,8 @@ gem 'puma'
 gem 'sentry-raven'
 gem 'carrierwave-aws'
 gem 'mini_magick'
+gem 'stripe'
+gem 'draper'
 
 group :development do
   gem 'thin'
@@ -36,12 +38,16 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner', '1.2.0'
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'fabrication'
   gem 'faker'
   gem 'launchy'
   gem 'capybara-email'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
 end
 
 group :production do
