@@ -1,7 +1,7 @@
 require "spec_helper"
 
 feature "user invites another user and they sign up" do
-  scenario "user sends invite, invitee signs up", js: true, vcr: true do
+  scenario "user sends invite, invitee signs up", :js, :vcr do
     morpheus = Fabricate(:user)
     neo = Fabricate.build(:user)
 

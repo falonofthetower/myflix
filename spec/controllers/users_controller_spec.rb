@@ -31,10 +31,6 @@ describe UsersController do
         post :create, user: Fabricate.attributes_for(:user)
       end
 
-      it "does not create a new user record" do
-        expect(User.count).to eq(0)
-      end
-
       it "renders the new template" do
         expect(response).to render_template :new
       end
