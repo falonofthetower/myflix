@@ -39,12 +39,12 @@ describe UserSignup do
       end
 
       it "makes the user follow the inviter" do
-        hans = User.where(email: "hans@falcon.com").first
+        hans = User.find_by(email: "hans@falcon.com")
         expect(hans.follows?(luke)).to be_truthy
       end
 
       it "make the inviter follow the user" do
-        hans = User.where(email: "hans@falcon.com").first
+        hans = User.find_by(email: "hans@falcon.com")
         expect(luke.follows?(hans)).to be_truthy
       end
 
