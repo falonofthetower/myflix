@@ -18,13 +18,18 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      handle_invitation
-      AppMailer.delay.welcome(@user)
-      redirect_to sign_in_path
-    else
-      render :new
-    end
+    result =
+      UserSignup.new(@user).sign_up(
+        params[:stripeToken],
+        params[:invitation_token]
+    )
+      if result.successful?
+        flash[:success] = "Account Created!"
+        redirect_to sign_in_path
+      else
+        flash.now[:danger] = result.error_message
+        render :new
+      end
   end
 
   def show
@@ -33,16 +38,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :full_name)
-  end
-
-  private
-
-  def handle_invitation
-    if params[:invitation_token].present?
-      invitation = Invitation.where(token: params[:invitation_token]).first
-      @user.follow(invitation.inviter)
-      invitation.inviter.follow(@user)
-      invitation.update_column(:token, nil)
-    end
   end
 end
