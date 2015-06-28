@@ -2,128 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16FWepCgpBrdIpYjA3Bu8ame&description=Sign%20up%20charge%20for%20lester%40kuhic.net
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Stripe/v1 RubyBindings/1.22.0
-      Authorization:
-      - Bearer sk_test_ac7hK0eIfCOZM0kOmQPJmvyr
-      Content-Type:
-      - application/x-www-form-urlencoded
-      X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"1.22.0","lang":"ruby","lang_version":"2.1.5 p273 (2014-11-13)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 3.16.0-39-generic (buildd@phianna) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
-        ) #53-Ubuntu SMP Tue May 26 09:38:21 UTC 2015","hostname":"falon-the-tower"}'
-      Content-Length:
-      - '117'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 19 Jun 2015 21:04:16 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1423'
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Max-Age:
-      - '300'
-      Cache-Control:
-      - no-cache, no-store
-      Request-Id:
-      - req_ZpDgQuLNdLubYV5P
-      Stripe-Version:
-      - '2015-04-07'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: |
-        {
-          "id": "ch_16FWeqCgpBrdIpYjfrHjMQJt",
-          "object": "charge",
-          "created": 1434747856,
-          "livemode": false,
-          "paid": true,
-          "status": "succeeded",
-          "amount": 999,
-          "currency": "usd",
-          "refunded": false,
-          "source": {
-            "id": "card_16FWepCgpBrdIpYjnX8waw0e",
-            "object": "card",
-            "last4": "4242",
-            "brand": "Visa",
-            "funding": "credit",
-            "exp_month": 7,
-            "exp_year": 2016,
-            "fingerprint": "WK9Xk0j3v4YY5hjj",
-            "country": "US",
-            "name": null,
-            "address_line1": null,
-            "address_line2": null,
-            "address_city": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_country": null,
-            "cvc_check": "pass",
-            "address_line1_check": null,
-            "address_zip_check": null,
-            "dynamic_last4": null,
-            "metadata": {},
-            "customer": null
-          },
-          "captured": true,
-          "balance_transaction": "txn_16FWeqCgpBrdIpYjMyfaewWf",
-          "failure_message": null,
-          "failure_code": null,
-          "amount_refunded": 0,
-          "customer": null,
-          "invoice": null,
-          "description": "Sign up charge for lester@kuhic.net",
-          "dispute": null,
-          "metadata": {},
-          "statement_descriptor": null,
-          "fraud_details": {},
-          "receipt_email": null,
-          "receipt_number": null,
-          "shipping": null,
-          "destination": null,
-          "application_fee": null,
-          "refunds": {
-            "object": "list",
-            "total_count": 0,
-            "has_more": false,
-            "url": "/v1/charges/ch_16FWeqCgpBrdIpYjfrHjMQJt/refunds",
-            "data": []
-          }
-        }
-    http_version: 
-  recorded_at: Fri, 19 Jun 2015 21:04:28 GMT
-- request:
-    method: post
-    uri: https://api.stripe.com/v1/customers
-    body:
-      encoding: US-ASCII
-      string: source=tok_16Ikl1CgpBrdIpYjUK8B8jBU&plan=golden&email=monte%40runte.net
+      string: card[number]=4242424242424242&card[exp_month]=6&card[exp_year]=2015&card[cvc]=123
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -140,7 +22,7 @@ http_interactions:
         version 3.16.0-41-generic (buildd@toyol) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
         ) #57-Ubuntu SMP Thu Jun 18 08:44:16 UTC 2015","hostname":"falon-the-tower"}'
       Content-Length:
-      - '71'
+      - '81'
   response:
     status:
       code: 200
@@ -149,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jun 2015 18:44:00 GMT
+      - Sun, 28 Jun 2015 18:43:49 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2362'
+      - '781'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -167,7 +49,99 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6VmJ5OMVDZ7anx
+      - req_6VmJR7FCJjbQss
+      Stripe-Version:
+      - '2015-04-07'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_16IkkrCgpBrdIpYjS20mOz4j",
+          "livemode": false,
+          "created": 1435517029,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_16IkkrCgpBrdIpYj2mWX4I2X",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 6,
+            "exp_year": 2015,
+            "fingerprint": "WK9Xk0j3v4YY5hjj",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "tokenization_method": null,
+            "dynamic_last4": null,
+            "metadata": {}
+          },
+          "client_ip": "75.110.111.115"
+        }
+    http_version: 
+  recorded_at: Sun, 28 Jun 2015 18:44:03 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: US-ASCII
+      string: source=tok_16IkkrCgpBrdIpYjS20mOz4j&plan=golden&email=coy.nolan%40bayer.name
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.22.0
+      Authorization:
+      - Bearer sk_test_ac7hK0eIfCOZM0kOmQPJmvyr
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.22.0","lang":"ruby","lang_version":"2.1.5 p273 (2014-11-13)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 3.16.0-41-generic (buildd@toyol) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
+        ) #57-Ubuntu SMP Thu Jun 18 08:44:16 UTC 2015","hostname":"falon-the-tower"}'
+      Content-Length:
+      - '76'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 28 Jun 2015 18:43:50 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2367'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6VmJqUvaVfbB0Y
       Stripe-Version:
       - '2015-04-07'
       Strict-Transport-Security:
@@ -177,21 +151,21 @@ http_interactions:
       string: |
         {
           "object": "customer",
-          "created": 1435517039,
-          "id": "cus_6VmJgRSJinX8bv",
+          "created": 1435517030,
+          "id": "cus_6VmJcU6OJrmyz8",
           "livemode": false,
           "description": null,
-          "email": "monte@runte.net",
+          "email": "coy.nolan@bayer.name",
           "delinquent": false,
           "metadata": {},
           "subscriptions": {
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6VmJgRSJinX8bv/subscriptions",
+            "url": "/v1/customers/cus_6VmJcU6OJrmyz8/subscriptions",
             "data": [
               {
-                "id": "sub_6VmJUn4pv3fUIb",
+                "id": "sub_6VmJQnv3aqM4zr",
                 "plan": {
                   "interval": "month",
                   "name": "The Best Streaming Videos",
@@ -207,12 +181,12 @@ http_interactions:
                   "statement_descriptor": "Video nirvana"
                 },
                 "object": "subscription",
-                "start": 1435517039,
+                "start": 1435517030,
                 "status": "active",
-                "customer": "cus_6VmJgRSJinX8bv",
+                "customer": "cus_6VmJcU6OJrmyz8",
                 "cancel_at_period_end": false,
-                "current_period_start": 1435517039,
-                "current_period_end": 1438109039,
+                "current_period_start": 1435517030,
+                "current_period_end": 1438109030,
                 "ended_at": null,
                 "trial_start": null,
                 "trial_end": null,
@@ -232,16 +206,16 @@ http_interactions:
             "object": "list",
             "total_count": 1,
             "has_more": false,
-            "url": "/v1/customers/cus_6VmJgRSJinX8bv/sources",
+            "url": "/v1/customers/cus_6VmJcU6OJrmyz8/sources",
             "data": [
               {
-                "id": "card_16Ikl1CgpBrdIpYjHhyhCPP2",
+                "id": "card_16IkkrCgpBrdIpYj2mWX4I2X",
                 "object": "card",
                 "last4": "4242",
                 "brand": "Visa",
                 "funding": "credit",
-                "exp_month": 7,
-                "exp_year": 2016,
+                "exp_month": 6,
+                "exp_year": 2015,
                 "fingerprint": "WK9Xk0j3v4YY5hjj",
                 "country": "US",
                 "name": null,
@@ -257,12 +231,12 @@ http_interactions:
                 "tokenization_method": null,
                 "dynamic_last4": null,
                 "metadata": {},
-                "customer": "cus_6VmJgRSJinX8bv"
+                "customer": "cus_6VmJcU6OJrmyz8"
               }
             ]
           },
-          "default_source": "card_16Ikl1CgpBrdIpYjHhyhCPP2"
+          "default_source": "card_16IkkrCgpBrdIpYj2mWX4I2X"
         }
     http_version: 
-  recorded_at: Sun, 28 Jun 2015 18:44:14 GMT
+  recorded_at: Sun, 28 Jun 2015 18:44:04 GMT
 recorded_with: VCR 2.9.3
