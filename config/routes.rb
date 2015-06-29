@@ -44,5 +44,5 @@ Myflix::Application.routes.draw do
 
   resources :invitations, only: [:new, :create]
 
-  mount StripeEvent::Engine, at: '/stripe_event'
+  mount StripeEvent::Engine, at: "/stripe_event"
 end
