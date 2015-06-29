@@ -35,6 +35,15 @@ describe SessionsController do
       end
     end
 
+    context "with valid credentials for a deactivated account" do
+      let(:joker) { Fabricate(:user, active: false) }
+
+      it "blocks suspended user from signing in" do
+        post :create, email: joker.email, password: joker.password
+        expect(flash[:danger]).not_to be_blank
+      end
+    end
+
     context "with invalid credentials" do
       before do
         batman = Fabricate(:user)
