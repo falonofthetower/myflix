@@ -277,6 +277,9 @@ GEM
     stripe (1.22.0)
       json (~> 1.8.1)
       rest-client (~> 1.4)
+    stripe_event (1.5.0)
+      activesupport (>= 3.1)
+      stripe (~> 1.6)
     sysexits (1.2.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
@@ -346,6 +349,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   stripe
+  stripe_event
   thin
   uglifier
   vcr

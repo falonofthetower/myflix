@@ -66,6 +66,15 @@ describe StripeWrapper do
         expect(response).to be_successful
       end
 
+      it "associates the customer with a user with valid card" do
+        luke = Fabricate(:user)
+        response = StripeWrapper::Customer.create(
+          source: valid_token,
+          user: luke
+        )
+        expect(response.customer_token).to be_present
+      end
+
       it "does not create a customer with declined card" do
         luke = Fabricate(:user)
         response = StripeWrapper::Customer.create(
