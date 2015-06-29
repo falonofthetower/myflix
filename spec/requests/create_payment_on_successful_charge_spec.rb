@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "create a payment on succesful charge", :vcr do
   let(:event_data) do
@@ -77,23 +77,23 @@ describe "create a payment on succesful charge", :vcr do
   end
 
   it "creates payment using webhook from stripe for successful charge" do
-    post '/stripe_event', event_data
+    post "/stripe_event", event_data
     expect(Payment.count).to eq(1)
   end
 
   it "creates payments associated with the user" do
     luke = Fabricate(:user, customer_token: "cus_6Vw1bCqE3Uqptz")
-    post '/stripe_event', event_data
+    post "/stripe_event", event_data
     expect(Payment.first.user).to eq(luke)
   end
 
   it "creates the payment for the correct amount" do
-    post '/stripe_event', event_data
+    post "/stripe_event", event_data
     expect(Payment.first.amount).to eq("999")
   end
 
   it "creates the payment with the reference_id" do
-    post '/stripe_event', event_data
+    post "/stripe_event", event_data
     expect(Payment.first.reference_id).to eq("ch_16Iu9OCgpBrdIpYjArgIbvSD")
   end
 end

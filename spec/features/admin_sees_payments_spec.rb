@@ -2,7 +2,11 @@ require "spec_helper"
 
 feature "Admin sees payment" do
   background do
-    luke = Fabricate(:user, full_name: "Luke Skywalker", email: "luke@rebel_alliance.com")
+    luke = Fabricate(
+      :user,
+      full_name: "Luke Skywalker",
+      email: "luke@rebel_alliance.com"
+    )
     Fabricate(:payment, amount: "999", user: luke)
   end
 

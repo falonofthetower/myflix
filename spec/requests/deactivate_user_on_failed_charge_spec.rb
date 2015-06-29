@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "Deactives user on failed charge" do
-  let(:event_data) {
+  let(:event_data) do
     {
       "id" => "evt_16J7wqCgpBrdIpYjZD5jb071",
       "created" => 1435606184,
@@ -74,11 +74,11 @@ describe "Deactives user on failed charge" do
       "request" => "iar_6WAHA3v88zinM5",
       "api_version" => "2015-04-07"
     }
-  }
+  end
 
   it "deactivates account using webhook from stripe failed charge" do
     luke = Fabricate(:user, customer_token: "cus_6VyGVJA97JdnOt", active: true)
-    post '/stripe_event', event_data
+    post "/stripe_event", event_data
     expect(luke.reload).not_to be_active
   end
 end

@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
         flash[:success] = "You have logged in"
         redirect_to home_path
       else
-        flash[:danger] = "Your account has been suspended, please contact customer support"
+        flash[:danger] =
+          "Your account has been suspended, please contact customer support"
         redirect_to sign_in_path
       end
     else

@@ -40,6 +40,6 @@ class User < ActiveRecord::Base
   end
 
   def active?
-    self.active
+    active
   end
 end

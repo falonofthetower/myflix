@@ -54,7 +54,7 @@ describe StripeWrapper do
       end
     end
   end
-  
+
   describe StripeWrapper::Customer do
     describe ".create", :vcr do
       it "creates a customer with a valid card" do
