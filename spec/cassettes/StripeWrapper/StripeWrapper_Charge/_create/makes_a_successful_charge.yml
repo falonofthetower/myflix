@@ -19,8 +19,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.22.0","lang":"ruby","lang_version":"2.1.5 p273 (2014-11-13)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 3.16.0-39-generic (buildd@phianna) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
-        ) #53-Ubuntu SMP Tue May 26 09:38:21 UTC 2015","hostname":"falon-the-tower"}'
+        version 3.16.0-41-generic (buildd@toyol) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
+        ) #57-Ubuntu SMP Thu Jun 18 08:44:16 UTC 2015","hostname":"falon-the-tower"}'
       Content-Length:
       - '81'
   response:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 18 Jun 2015 06:15:54 GMT
+      - Sun, 28 Jun 2015 18:43:53 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '747'
+      - '781'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_3pEyFeiskjA22GJT
+      - req_6VmJ3TKvJOAkRc
       Stripe-Version:
       - '2015-04-07'
       Strict-Transport-Security:
@@ -58,14 +58,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16EwJaCgpBrdIpYjIhagbGna",
+          "id": "tok_16IkkvCgpBrdIpYjeIzOz61z",
           "livemode": false,
-          "created": 1434608154,
+          "created": 1435517033,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16EwJaCgpBrdIpYjRHIfcyfZ",
+            "id": "card_16IkkvCgpBrdIpYj21VMQiN1",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -84,19 +84,20 @@ http_interactions:
             "cvc_check": "unchecked",
             "address_line1_check": null,
             "address_zip_check": null,
+            "tokenization_method": null,
             "dynamic_last4": null,
             "metadata": {}
           },
-          "client_ip": "75.110.83.241"
+          "client_ip": "75.110.111.115"
         }
     http_version: 
-  recorded_at: Thu, 18 Jun 2015 06:16:03 GMT
+  recorded_at: Sun, 28 Jun 2015 18:44:07 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16EwJaCgpBrdIpYjIhagbGna&description=A%20valid%20charge
+      string: amount=999&currency=usd&source=tok_16IkkvCgpBrdIpYjeIzOz61z&description=A%20valid%20charge
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -110,8 +111,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.22.0","lang":"ruby","lang_version":"2.1.5 p273 (2014-11-13)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
-        version 3.16.0-39-generic (buildd@phianna) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
-        ) #53-Ubuntu SMP Tue May 26 09:38:21 UTC 2015","hostname":"falon-the-tower"}'
+        version 3.16.0-41-generic (buildd@toyol) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
+        ) #57-Ubuntu SMP Thu Jun 18 08:44:16 UTC 2015","hostname":"falon-the-tower"}'
       Content-Length:
       - '90'
   response:
@@ -122,11 +123,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 18 Jun 2015 06:15:55 GMT
+      - Sun, 28 Jun 2015 18:43:54 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1402'
+      - '1435'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -140,7 +141,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_LAtxPuisRzA54gEY
+      - req_6VmJ3adVDlZg5N
       Stripe-Version:
       - '2015-04-07'
       Strict-Transport-Security:
@@ -149,9 +150,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16EwJbCgpBrdIpYjuMDvR1rD",
+          "id": "ch_16IkkwCgpBrdIpYjvk3G8s2i",
           "object": "charge",
-          "created": 1434608155,
+          "created": 1435517034,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -159,7 +160,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_16EwJaCgpBrdIpYjRHIfcyfZ",
+            "id": "card_16IkkvCgpBrdIpYj21VMQiN1",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -178,12 +179,13 @@ http_interactions:
             "cvc_check": "pass",
             "address_line1_check": null,
             "address_zip_check": null,
+            "tokenization_method": null,
             "dynamic_last4": null,
             "metadata": {},
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_16EwJbCgpBrdIpYjvexkVF5i",
+          "balance_transaction": "txn_16IkkwCgpBrdIpYjEerTHU5a",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
@@ -203,10 +205,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_16EwJbCgpBrdIpYjuMDvR1rD/refunds",
+            "url": "/v1/charges/ch_16IkkwCgpBrdIpYjvk3G8s2i/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Thu, 18 Jun 2015 06:16:04 GMT
+  recorded_at: Sun, 28 Jun 2015 18:44:08 GMT
 recorded_with: VCR 2.9.3

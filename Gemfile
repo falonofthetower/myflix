@@ -18,6 +18,7 @@ gem 'sentry-raven'
 gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'stripe'
+gem 'stripe_event'
 gem 'draper'
 
 group :development do
@@ -47,7 +48,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
 end
 
 group :production do

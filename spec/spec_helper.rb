@@ -5,9 +5,10 @@ require "rspec/rails"
 require "capybara/email/rspec"
 require "sidekiq/testing/inline"
 require "vcr"
+require "capybara/poltergeist"
 
 Capybara.server_port = 52662
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -28,6 +29,7 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.allow_http_connections_when_no_cassette = true
   c.ignore_localhost = true
+  c.default_cassette_options = { record: :new_episodes }
 end
 
 RSpec.configure do |config|
