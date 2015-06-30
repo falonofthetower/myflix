@@ -48,7 +48,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
 end
 
 group :production do
