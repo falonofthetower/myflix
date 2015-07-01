@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
       following_relationships.create(leader: another_user)
     end
   end
+
+  def deactivate!
+    update_column :active, false
+  end
 end

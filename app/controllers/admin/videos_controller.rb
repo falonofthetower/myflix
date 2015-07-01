@@ -1,7 +1,4 @@
-class Admin::VideosController < ApplicationController
-  before_action :require_user
-  before_action :require_admin
-
+class Admin::VideosController < AdminController
   def new
     @video = Video.new
   end
@@ -14,13 +11,6 @@ class Admin::VideosController < ApplicationController
     else
       flash.now[:danger] = "Check error messages!"
       render :new
-    end
-  end
-
-  def require_admin
-    unless current_user.admin?
-      flash[:danger] = "You don't have authorization to do that"
-      redirect_to home_path
     end
   end
 

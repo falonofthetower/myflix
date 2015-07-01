@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/tokens
     body:
       encoding: US-ASCII
-      string: card[number]=4242424242424242&card[exp_month]=6&card[exp_year]=2015&card[cvc]=123
+      string: card[number]=4000000000000002&card[exp_month]=6&card[exp_year]=2015&card[cvc]=123
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jun 2015 18:43:53 GMT
+      - Sun, 28 Jun 2015 18:43:51 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6VmJ3TKvJOAkRc
+      - req_6VmJ34IxL7uypY
       Stripe-Version:
       - '2015-04-07'
       Strict-Transport-Security:
@@ -58,21 +58,21 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_16IkkvCgpBrdIpYjeIzOz61z",
+          "id": "tok_16IkksCgpBrdIpYj9UvMiALE",
           "livemode": false,
-          "created": 1435517033,
+          "created": 1435517030,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_16IkkvCgpBrdIpYj21VMQiN1",
+            "id": "card_16IkksCgpBrdIpYj12gmR9eS",
             "object": "card",
-            "last4": "4242",
+            "last4": "0002",
             "brand": "Visa",
             "funding": "credit",
             "exp_month": 6,
             "exp_year": 2015,
-            "fingerprint": "WK9Xk0j3v4YY5hjj",
+            "fingerprint": "P1DF9kB5k6WuAwfW",
             "country": "US",
             "name": null,
             "address_line1": null,
@@ -91,13 +91,13 @@ http_interactions:
           "client_ip": "75.110.111.115"
         }
     http_version: 
-  recorded_at: Sun, 28 Jun 2015 18:44:07 GMT
+  recorded_at: Sun, 28 Jun 2015 18:44:05 GMT
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&source=tok_16IkkvCgpBrdIpYjeIzOz61z&description=A%20valid%20charge
+      string: source=tok_16IkksCgpBrdIpYj9UvMiALE&plan=golden&email=hayden.wiza%40kuhlmanmonahan.biz
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -114,20 +114,20 @@ http_interactions:
         version 3.16.0-41-generic (buildd@toyol) (gcc version 4.9.1 (Ubuntu 4.9.1-16ubuntu6)
         ) #57-Ubuntu SMP Thu Jun 18 08:44:16 UTC 2015","hostname":"falon-the-tower"}'
       Content-Length:
-      - '90'
+      - '86'
   response:
     status:
-      code: 200
-      message: OK
+      code: 402
+      message: Payment Required
     headers:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jun 2015 18:43:54 GMT
+      - Sun, 28 Jun 2015 18:43:51 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1435'
+      - '134'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -141,74 +141,20 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_6VmJ3adVDlZg5N
+      - req_6VmJS64wt7SED8
       Stripe-Version:
       - '2015-04-07'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_16IkkwCgpBrdIpYjvk3G8s2i",
-          "object": "charge",
-          "created": 1435517034,
-          "livemode": false,
-          "paid": true,
-          "status": "succeeded",
-          "amount": 999,
-          "currency": "usd",
-          "refunded": false,
-          "source": {
-            "id": "card_16IkkvCgpBrdIpYj21VMQiN1",
-            "object": "card",
-            "last4": "4242",
-            "brand": "Visa",
-            "funding": "credit",
-            "exp_month": 6,
-            "exp_year": 2015,
-            "fingerprint": "WK9Xk0j3v4YY5hjj",
-            "country": "US",
-            "name": null,
-            "address_line1": null,
-            "address_line2": null,
-            "address_city": null,
-            "address_state": null,
-            "address_zip": null,
-            "address_country": null,
-            "cvc_check": "pass",
-            "address_line1_check": null,
-            "address_zip_check": null,
-            "tokenization_method": null,
-            "dynamic_last4": null,
-            "metadata": {},
-            "customer": null
-          },
-          "captured": true,
-          "balance_transaction": "txn_16IkkwCgpBrdIpYjEerTHU5a",
-          "failure_message": null,
-          "failure_code": null,
-          "amount_refunded": 0,
-          "customer": null,
-          "invoice": null,
-          "description": "A valid charge",
-          "dispute": null,
-          "metadata": {},
-          "statement_descriptor": null,
-          "fraud_details": {},
-          "receipt_email": null,
-          "receipt_number": null,
-          "shipping": null,
-          "destination": null,
-          "application_fee": null,
-          "refunds": {
-            "object": "list",
-            "total_count": 0,
-            "has_more": false,
-            "url": "/v1/charges/ch_16IkkwCgpBrdIpYjvk3G8s2i/refunds",
-            "data": []
+          "error": {
+            "message": "Your card was declined.",
+            "type": "card_error",
+            "param": "",
+            "code": "card_declined"
           }
         }
     http_version: 
-  recorded_at: Sun, 28 Jun 2015 18:44:08 GMT
+  recorded_at: Sun, 28 Jun 2015 18:44:05 GMT
 recorded_with: VCR 2.9.3
