@@ -1,10 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: myflix_development
+  database: myflix_dev
   pool: 5
   username: falon
-  password: myflix
+  password: 3141-5926-5359
 
 test:
   adapter: postgresql
@@ -12,4 +12,12 @@ test:
   database: myflix_test
   pool: 5
   username: falon
-  password: myflix
+  password: 3141-5926-5359
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: myflix_prod
+  pool: 5
+  username: falon
+  password: 3141-5926-5359

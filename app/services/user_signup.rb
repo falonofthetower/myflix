@@ -16,7 +16,7 @@ class UserSignup
         @user.save
         handle_invitation(invitation_token)
         @status = :success
-        AppMailer.delay.welcome(@user)
+        AppMailer.delay.welcome(@user.id)
       else
         @status = :failure
         @error_message = customer.error_message

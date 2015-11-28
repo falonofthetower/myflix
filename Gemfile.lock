@@ -347,7 +347,7 @@ DEPENDENCIES
   puma
   rails (= 4.1.1)
   rails_12factor
-  rspec-rails (= 2.99)
+  rspec-rails (~> 2.99)
   rubocop
   sass-rails
   selenium-webdriver
@@ -360,3 +360,6 @@ DEPENDENCIES
   uglifier
   vcr
   webmock
+
+BUNDLED WITH
+   1.10.6
