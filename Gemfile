@@ -28,7 +28,7 @@ group :development do
   gem 'letter_opener'
   gem 'guard-rspec'
   gem 'rubocop', require: false
-  gem 'haml-lint', require: false
+  gem 'haml_lint', require: false
 end
 
 group :development, :test do
